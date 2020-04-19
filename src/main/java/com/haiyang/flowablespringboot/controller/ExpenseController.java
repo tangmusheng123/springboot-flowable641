@@ -51,6 +51,7 @@ public class ExpenseController {
         HashMap<String, Object> map = new HashMap<>();
         map.put("taskUser", userId);
         map.put("money", money);
+        map.put("descption", descption);
         ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("Expense", map);
         return "提交成功.流程Id为：" + processInstance.getId();
     }
@@ -132,7 +133,7 @@ public class ExpenseController {
         BpmnModel bpmnModel = repositoryService.getBpmnModel(pi.getProcessDefinitionId());
         ProcessEngineConfiguration engconf = processEngine.getProcessEngineConfiguration();
         ProcessDiagramGenerator diagramGenerator = engconf.getProcessDiagramGenerator();
-        InputStream in = diagramGenerator.generateDiagram(bpmnModel, "png", activityIds, flows, engconf.getActivityFontName(), engconf.getLabelFontName(), engconf.getAnnotationFontName(), engconf.getClassLoader(), 1.0);
+        InputStream in = diagramGenerator.generateDiagram(bpmnModel, "png", activityIds, flows, engconf.getActivityFontName(), engconf.getLabelFontName(), engconf.getAnnotationFontName(), engconf.getClassLoader(), 1.0,true);
         OutputStream out = null;
         byte[] buf = new byte[1024];
         int legth = 0;
